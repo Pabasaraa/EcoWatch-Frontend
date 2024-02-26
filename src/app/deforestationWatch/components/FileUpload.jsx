@@ -1,14 +1,10 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { CloudArrowUpIcon } from "@heroicons/react/24/solid";
-import routerPaths from "../../../constants/routerPaths";
 import { getFileSize } from "../util/fileSize";
 
-const FileUpload = () => {
-  const [file, setFile] = useState(null);
+const FileUpload = ({ file, setFile, proceed, isUploading }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef();
-  const navigate = useNavigate();
 
   const checkFileValidity = (file) => {
     if (file) {
@@ -54,6 +50,12 @@ const FileUpload = () => {
   const onDragLeave = (event) => {
     event.preventDefault();
     setIsDragOver(false);
+  };
+
+  const onProceed = () => {
+    if (file) {
+      proceed(file);
+    }
   };
 
   return (
@@ -144,15 +146,15 @@ const FileUpload = () => {
                   <svg
                     data-slot="icon"
                     fill="none"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M6 18 18 6M6 6l12 12"
                     ></path>
                   </svg>
@@ -162,14 +164,38 @@ const FileUpload = () => {
           )}
           <div className="flex flex-col w-full h-full justify-center items-center">
             <button
-              className={`bg-green-600 text-white font-semibold rounded-md px-8 py-2 hover:bg-green-700 transition duration-300 ease-in-out ${
+              className={`flex gap-2 justify-center text-sm items-center bg-green-600 text-white font-semibold rounded-md px-6 py-2 hover:bg-green-700 transition duration-300 ease-in-out ${
                 file ? "" : "opacity-50 cursor-not-allowed"
               }`}
-              onClick={() =>
-                navigate(routerPaths.DEFORESTATION_PREDICTION_PROCESS)
-              }
+              disabled={!file}
+              onClick={onProceed}
             >
-              PROCEED
+              {isUploading ? (
+                <>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill="white"
+                      d="M10.72,19.9a8,8,0,0,1-6.5-9.79A7.77,7.77,0,0,1,10.4,4.16a8,8,0,0,1,9.49,6.52A1.54,1.54,0,0,0,21.38,12h.13a1.37,1.37,0,0,0,1.38-1.54,11,11,0,1,0-12.7,12.39A1.54,1.54,0,0,0,12,21.34h0A1.47,1.47,0,0,0,10.72,19.9Z"
+                    >
+                      <animateTransform
+                        attributeName="transform"
+                        type="rotate"
+                        dur="0.75s"
+                        values="0 12 12;360 12 12"
+                        repeatCount="indefinite"
+                      />
+                    </path>
+                  </svg>
+                  <span>UPLOADING</span>
+                </>
+              ) : (
+                <span>PROCEED</span>
+              )}
             </button>
           </div>
         </div>

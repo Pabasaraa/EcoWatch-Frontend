@@ -23,11 +23,11 @@ function App() {
             element={<DeforestationWatch />}
           />
           <Route
-            path={routerPaths.DEFORESTATION_PREDICTION_PROCESS}
+            path={`${routerPaths.DEFORESTATION_PREDICTION_PROCESS}/:id`}
             element={<PredictionProcess />}
           />
           <Route
-            path={routerPaths.DEFORESTATION_PREDICTION_RESULT}
+            path={`${routerPaths.DEFORESTATION_PREDICTION_RESULT}/:id`}
             element={<PredictionResult />}
           />
         </Route>

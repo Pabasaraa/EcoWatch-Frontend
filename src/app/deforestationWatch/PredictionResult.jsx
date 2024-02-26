@@ -1,12 +1,41 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { React, useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/solid";
-import originalInput from "./assets/original-input.png";
-import predictionMask from "./assets/prediction-mask.png";
+import {
+  getTheTotal,
+  convertToPercentage,
+  calculateSpecificTotal,
+} from "./util/coverageCounter";
 import routerPaths from "../../constants/routerPaths";
 
 const PredictionResult = () => {
+  const DEFORESTED_AREAS_KEYS = [2, 4, 5, 6];
+  const BACKEND_END_POINT = process.env.REACT_APP_BACKEND_END_POINT;
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [fileName, setFileName] = useState(null);
+  const [inputImg, setInputImg] = useState(null);
+  const [predictionResult, setPredictionResult] = useState(null);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [points, setPoints] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_END_POINT}/deforestation/results/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setFileName(response.data.Results.filename);
+        setInputImg(response.data.Results.input_img);
+        setPredictionResult(response.data.Results.prediction);
+        setPoints(response.data.Results.value);
+        setTotalPoints(getTheTotal(response.data.Results.value));
+        console.log(getTheTotal(response.data.Results.value));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
 
   return (
     <>
@@ -23,24 +52,38 @@ const PredictionResult = () => {
               <p className="text-sm font-semibold text-neutral-400">
                 Overview:
               </p>
-              <div className="flex flex-row w-full justify-between">
+              <div className="flex flex-row w-full justify-around pt-2 pb-4">
                 <div className="flex flex-col text-center gap-1">
-                  <img
-                    src={originalInput}
-                    alt="original input"
-                    className="w-80 h-auto"
-                  />
-                  <p className="text-sm text-neutral-400">
+                  {inputImg ? (
+                    <img
+                      src={`data:image/jpeg;base64,${inputImg}`}
+                      alt="original input"
+                      className="w-96 h-auto"
+                    />
+                  ) : (
+                    <div className="w-96 h-96 bg-neutral-100 rounded-md flex justify-center items-center">
+                      <p className="text-lg text-neutral-500">Loading...</p>
+                    </div>
+                  )}
+                  <p className="text-sm text-neutral-400 pt-2">
                     Rasterized Original Input
                   </p>
                 </div>
                 <div className="flex flex-col text-center gap-1">
-                  <img
-                    src={predictionMask}
-                    alt="original input"
-                    className="w-80 h-auto"
-                  />
-                  <p className="text-sm text-neutral-400">Prediction Mask</p>
+                  {predictionResult ? (
+                    <img
+                      src={`data:image/jpeg;base64,${predictionResult}`}
+                      alt="segmented prediction"
+                      className="w-96 h-auto"
+                    />
+                  ) : (
+                    <div className="w-96 h-96 bg-neutral-100 rounded-md flex justify-center items-center">
+                      <p className="text-lg text-neutral-500">Loading...</p>
+                    </div>
+                  )}
+                  <p className="text-sm text-neutral-400 pt-2">
+                    Segmented Prediction
+                  </p>
                 </div>
               </div>
             </div>
@@ -48,59 +91,95 @@ const PredictionResult = () => {
           <div className="flex flex-col gap-2 border border-neutral-200 rounded-md px-4 py-2">
             <div className="flex flex-col">
               <div className="flex flex-col">
-                <p className="text-sm font-semibold text-neutral-400">
+                <p className="text-sm font-semibold text-neutral-400 py-2">
                   Quantitative Analysis:
                 </p>
                 <hr className="border-1 border-neutral-200 w-full my-2" />
               </div>
 
-              <div className="flex flex-row gap-10 w-full justify-stretch">
+              <div className="flex flex-row gap-10 w-full justify-stretch py-4">
                 <div className="basis-1/2 px-4">
                   <ul className="list-disc list-inside">
                     <li className="flex text-md text-neutral-600 font-semibold justify-between mb-1">
                       <p>Remaining Forest Area</p>
-                      <p>40%</p>
+                      <p>
+                        {points && convertToPercentage(points[3], totalPoints)}
+                        {" %"}
+                      </p>
                     </li>
                     <li className="flex flex-col text-md text-neutral-600 font-semibold gap-1 mb-1">
                       <p className="flex w-full justify-between">
-                        <span>Deforested Area</span> <span>30%</span>
+                        <span>Deforested Area</span>{" "}
+                        <span>
+                          {points &&
+                            calculateSpecificTotal(
+                              points,
+                              DEFORESTED_AREAS_KEYS,
+                              totalPoints
+                            )}
+                          %
+                        </span>
                       </p>
                       <ul className="list-disc list-inside pl-5">
                         <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
                           <p>Naturally Degraded Area</p>
-                          <p>10%</p>
+                          <p>
+                            {points &&
+                              convertToPercentage(points[5], totalPoints)}
+                            {" %"}
+                          </p>
                         </li>
                         <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
                           <p>Cultivation Area</p>
-                          <p>10%</p>
+                          <p>
+                            {points &&
+                              convertToPercentage(points[2], totalPoints)}
+                            {" %"}
+                          </p>
                         </li>
                         <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
                           <p>Residential Area</p>
-                          <p>5%</p>
+                          <p>
+                            {points &&
+                              convertToPercentage(points[4], totalPoints)}
+                            {" %"}
+                          </p>
                         </li>
                         <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
                           <p>Other</p>
-                          <p>5%</p>
+                          <p>
+                            {points &&
+                              convertToPercentage(points[6], totalPoints)}
+                            {" %"}
+                          </p>
                         </li>
                       </ul>
                     </li>
                     <li className="flex text-md text-neutral-600 font-semibold justify-between mb-1">
                       <p>Unclassified</p>
-                      <p>30%</p>
+                      <p>
+                        {points && convertToPercentage(points[1], totalPoints)}%
+                      </p>
                     </li>
                   </ul>
                 </div>
-                <div className="basis-1/2">
-                  <img
-                    src={predictionMask}
-                    alt="original input"
-                    className="w-80 h-auto"
-                  />
+                <div className="basis-1/2 flex justify-center">
+                  {predictionResult ? (
+                    <img
+                      src={`data:image/jpeg;base64,${predictionResult}`}
+                      alt="original input"
+                      className="w-80 h-auto"
+                    />
+                  ) : (
+                    <div className="w-80 h-80 bg-neutral-100 rounded-md flex justify-center items-center">
+                      <p className="text-lg text-neutral-500">Loading...</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full h-full justify-center items-center">
+          <div className="flex flex-col w-full h-full justify-center items-center mt-6">
             <button
               className="flex font-semibold text-green-600 items-center gap-2"
               onClick={() => navigate(routerPaths.HOME)}
