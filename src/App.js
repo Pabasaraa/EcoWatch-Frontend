@@ -8,6 +8,8 @@ import ContactUs from "./app/contactUs/ContactUs";
 import DeforestationWatch from "./app/deforestationWatch/DeforestationWatch";
 import PredictionProcess from "./app/deforestationWatch/PredictionProcess";
 import PredictionResult from "./app/deforestationWatch/PredictionResult";
+import ForestTypeWatch from "./app/EcoClassifyExplorer/ForestTypeWatch";
+import ForestTypeResult from "./app/EcoClassifyExplorer/ForestTypeResult";
 
 function App() {
   return (
@@ -30,7 +32,16 @@ function App() {
             path={routerPaths.DEFORESTATION_PREDICTION_RESULT}
             element={<PredictionResult />}
           />
+          <Route
+            path={routerPaths.FOREST_TYPE_WATCH}
+            element={<ForestTypeWatch />}
+          />
+          <Route
+            path={routerPaths.FOREST_TYPE_RESULT}
+            element={<ForestTypeResult />}
+          />
         </Route>
+
       </Routes>
     </BrowserRouter>
   );
