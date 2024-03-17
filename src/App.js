@@ -32,16 +32,14 @@ function App() {
             path={`${routerPaths.DEFORESTATION_PREDICTION_RESULT}/:id`}
             element={<PredictionResult />}
           />
-
           <Route
-            path={routerPaths.ECOHEALTHMONITOR}
+            path={routerPaths.ECOHEALTH_MONITOR}
             element={<EcoHealthMonitor />}
           />
           <Route
             path={`${routerPaths.ECOHEALTH_PREDICTION_RESULT}/:id`}
             element={<HealthPredictionResult />}
           />
-
         </Route>
       </Routes>
     </BrowserRouter>

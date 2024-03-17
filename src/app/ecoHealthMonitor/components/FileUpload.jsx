@@ -97,7 +97,7 @@ const FileUpload = ({ file, setFile, proceed, isUploading }) => {
                       className="hidden"
                       ref={fileInputRef}
                       onChange={onFileChange}
-                      accept=".tiff"
+                      accept=".tif"
                     />
                   </div>
                 </div>
