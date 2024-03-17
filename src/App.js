@@ -25,11 +25,11 @@ function App() {
             element={<DeforestationWatch />}
           />
           <Route
-            path={routerPaths.DEFORESTATION_PREDICTION_PROCESS}
+            path={`${routerPaths.DEFORESTATION_PREDICTION_PROCESS}/:id`}
             element={<PredictionProcess />}
           />
           <Route
-            path={routerPaths.DEFORESTATION_PREDICTION_RESULT}
+            path={`${routerPaths.DEFORESTATION_PREDICTION_RESULT}/:id`}
             element={<PredictionResult />}
           />
           <Route
@@ -37,7 +37,7 @@ function App() {
             element={<ForestTypeWatch />}
           />
           <Route
-            path={routerPaths.FOREST_TYPE_RESULT}
+            path={`${routerPaths.FOREST_TYPE_RESULT}/:id`}
             element={<ForestTypeResult />}
           />
         </Route>

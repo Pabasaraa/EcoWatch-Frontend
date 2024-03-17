@@ -10,11 +10,10 @@ const Hero = () => {
             <div className="flex flex-col text-white w-full md:w-1/2 lg:w-5/12 h-full justify-center gap-10">
               <div className="flex flex-col gap-1">
                 <p className="text-lg sm:text-lg md:text-2xl font-semibold tracking-wider">
-                  ~ Deforestation Watch ~
+                Forest Type Monitoring System ~
                 </p>
                 <p className="text-sm tracking-wide text-neutral-300 leading-relaxed">
-                  Uncover the impact and patterns of deforestation with our
-                  cutting-edge detection technology.
+               Analyze the biodiversity and ecological health of various forest types through our innovative classification technology.
                 </p>
               </div>
             </div>

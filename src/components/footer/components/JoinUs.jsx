@@ -3,10 +3,10 @@ import React from "react";
 const JoinUs = () => {
   return (
     <>
-      <div className="flex w-full justify-center text-center ">
+      <div className="flex w-full justify-center text-center my-6">
         <div className="flex items-center basis-1/2">
-          <div className="flex flex-col gap-8 w-full">
-            <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-6 w-full">
+            <div className="flex flex-col gap-1">
               <p className="text-lg sm:text-xl md:text-xl lg:text-xl font-bold text-white">
                 Walk to the future, come with us ...
               </p>

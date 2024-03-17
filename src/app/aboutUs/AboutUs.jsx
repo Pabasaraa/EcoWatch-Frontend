@@ -11,7 +11,6 @@ const AboutUs = () => {
         <InfoCardContainer />
         <hr className="w-3/4 m-auto" />
         <TeamInfoContainer />
-        {/* <JoinUs /> */}
       </div>
     </>
   );
