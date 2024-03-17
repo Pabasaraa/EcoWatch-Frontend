@@ -19,7 +19,7 @@ const servicesList = [
     description:
       "Assess the well-being of forests through comprehensive health analysis.",
     img: wildlifeTracker,
-    path: routerPaths.HOME,
+    path: routerPaths.ECOHEALTHMONITOR,
   },
   {
     title: "EcoClassify Explorer",
