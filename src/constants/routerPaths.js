@@ -7,6 +7,8 @@ const routerPaths = {
   DEFORESTATION_WATCH: "/tools/deforestation-watch",
   DEFORESTATION_PREDICTION_PROCESS: "/tools/deforestation-watch/process",
   DEFORESTATION_PREDICTION_RESULT: "/tools/deforestation-watch/result",
+  FOREST_TYPE_WATCH: "/tools/forest-type-watch",
+  FOREST_TYPE_RESULT: "/tools/forest-type-watch/result",
   ECOHEALTH_MONITOR: "/tools/ecohealthmonitor",
   ECOHEALTH_PREDICTION_RESULT: "/tools/ecohealthmonitor/result",
   NOT_FOUND: "/not-found",

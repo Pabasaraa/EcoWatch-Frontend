@@ -8,6 +8,8 @@ import ContactUs from "./app/contactUs/ContactUs";
 import DeforestationWatch from "./app/deforestationWatch/DeforestationWatch";
 import PredictionProcess from "./app/deforestationWatch/PredictionProcess";
 import PredictionResult from "./app/deforestationWatch/PredictionResult";
+import ForestTypeWatch from "./app/EcoClassifyExplorer/ForestTypeWatch";
+import ForestTypeResult from "./app/EcoClassifyExplorer/ForestTypeResult";
 import EcoHealthMonitor from "./app/ecoHealthMonitor/EcoHealthMonitor";
 import HealthPredictionResult from "./app/ecoHealthMonitor/HealthPredictionResult";
 
@@ -31,6 +33,14 @@ function App() {
           <Route
             path={`${routerPaths.DEFORESTATION_PREDICTION_RESULT}/:id`}
             element={<PredictionResult />}
+          />
+          <Route
+            path={routerPaths.FOREST_TYPE_WATCH}
+            element={<ForestTypeWatch />}
+          />
+          <Route
+            path={`${routerPaths.FOREST_TYPE_RESULT}/:id`}
+            element={<ForestTypeResult />}
           />
           <Route
             path={routerPaths.ECOHEALTH_MONITOR}
