@@ -11,14 +11,14 @@ const servicesList = [
     title: "Deforestation Watch",
     description:
       "Uncover the impact of deforestation with our cutting-edge detection technology.",
-    img: wildlifeTracker,
+    img: deforestatioinWatch,
     path: routerPaths.DEFORESTATION_WATCH,
   },
   {
     title: "EcoHealth Monitor",
     description:
       "Assess the well-being of forests through comprehensive health analysis.",
-    img: wildlifeTracker,
+    img: ecoHealthMonitor,
     path: routerPaths.ECOHEALTH_MONITOR,
   },
   {

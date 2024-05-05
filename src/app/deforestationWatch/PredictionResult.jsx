@@ -10,7 +10,7 @@ import {
 import routerPaths from "../../constants/routerPaths";
 
 const PredictionResult = () => {
-  const DEFORESTED_AREAS_KEYS = [2, 4, 5, 6];
+  const DEFORESTED_AREAS_KEYS = [1, 3, 4, 5];
   const BACKEND_END_POINT = process.env.REACT_APP_BACKEND_END_POINT;
   const navigate = useNavigate();
   const { id } = useParams();
@@ -103,7 +103,7 @@ const PredictionResult = () => {
                     <li className="flex text-md text-neutral-600 font-semibold justify-between mb-1">
                       <p>Remaining Forest Area</p>
                       <p>
-                        {points && convertToPercentage(points[3], totalPoints)}
+                        {points && convertToPercentage(points[2], totalPoints)}
                         {" %"}
                       </p>
                     </li>
@@ -125,7 +125,7 @@ const PredictionResult = () => {
                           <p>Naturally Degraded Area</p>
                           <p>
                             {points &&
-                              convertToPercentage(points[5], totalPoints)}
+                              convertToPercentage(points[3], totalPoints)}
                             {" %"}
                           </p>
                         </li>
@@ -133,7 +133,7 @@ const PredictionResult = () => {
                           <p>Cultivation Area</p>
                           <p>
                             {points &&
-                              convertToPercentage(points[2], totalPoints)}
+                              convertToPercentage(points[1], totalPoints)}
                             {" %"}
                           </p>
                         </li>
@@ -141,7 +141,7 @@ const PredictionResult = () => {
                           <p>Residential Area</p>
                           <p>
                             {points &&
-                              convertToPercentage(points[4], totalPoints)}
+                              convertToPercentage(points[5], totalPoints)}
                             {" %"}
                           </p>
                         </li>
@@ -149,7 +149,7 @@ const PredictionResult = () => {
                           <p>Other</p>
                           <p>
                             {points &&
-                              convertToPercentage(points[6], totalPoints)}
+                              convertToPercentage(points[4], totalPoints)}
                             {" %"}
                           </p>
                         </li>
@@ -158,7 +158,7 @@ const PredictionResult = () => {
                     <li className="flex text-md text-neutral-600 font-semibold justify-between mb-1">
                       <p>Unclassified</p>
                       <p>
-                        {points && convertToPercentage(points[1], totalPoints)}%
+                        {points && convertToPercentage(points[0], totalPoints)}%
                       </p>
                     </li>
                   </ul>

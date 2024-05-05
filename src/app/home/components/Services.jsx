@@ -22,11 +22,11 @@ const Services = () => {
                 className="flex flex-col w-full sm:w-1/2 md:w-full gap-6 px-4 py-6 items-center text-center rounded-xl cursor-pointer hover:bg-white hover:shadow-lg transition duration-500 ease-in-out"
                 onClick={() => navigate(service.path)}
               >
-                <div className="w-32">
+                <div>
                   <img
                     src={service.img}
                     alt={service.title}
-                    className="w-full h-auto object-scale-down"
+                    className="w-[117px] h-[138px] object-scale-down"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
