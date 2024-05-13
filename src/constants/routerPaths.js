@@ -12,6 +12,7 @@ const routerPaths = {
   ECOHEALTH_MONITOR: "/tools/ecohealthmonitor",
   ECOHEALTH_PREDICTION_RESULT: "/tools/ecohealthmonitor/result",
   NOT_FOUND: "/not-found",
+  WILDLIFE_TRACKER_UPLOAD: "/tools/wildlife-tracker",
 };
 
 export default routerPaths;

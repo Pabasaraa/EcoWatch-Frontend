@@ -33,7 +33,7 @@ const servicesList = [
     description:
       "Embark on a journey of identifying and monitoring species to preserve biodiversity",
     img: wildlifeTracker,
-    path: routerPaths.HOME,
+    path: routerPaths.WILDLIFE_TRACKER_UPLOAD,
   },
 ];
 

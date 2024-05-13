@@ -12,6 +12,7 @@ import ForestTypeWatch from "./app/EcoClassifyExplorer/ForestTypeWatch";
 import ForestTypeResult from "./app/EcoClassifyExplorer/ForestTypeResult";
 import EcoHealthMonitor from "./app/ecoHealthMonitor/EcoHealthMonitor";
 import HealthPredictionResult from "./app/ecoHealthMonitor/HealthPredictionResult";
+import WildlifeUpload from "./app/wildlifeTracker/WildlifeUpload";
 
 function App() {
   return (
@@ -49,6 +50,10 @@ function App() {
           <Route
             path={`${routerPaths.ECOHEALTH_PREDICTION_RESULT}/:id`}
             element={<HealthPredictionResult />}
+          />
+          <Route
+            path={routerPaths.WILDLIFE_TRACKER_UPLOAD}
+            element={<WildlifeUpload />}
           />
         </Route>
       </Routes>
