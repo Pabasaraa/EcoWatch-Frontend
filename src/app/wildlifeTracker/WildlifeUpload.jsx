@@ -26,7 +26,7 @@ const WildlifeUpload = () => {
     localStorage.setItem("fileSize", getFileSize(input.size));
 
     await axios
-      .post(`${BACKEND_END_POINT}/video/upload`, formData)
+      .post(`${BACKEND_END_POINT}/wildlife/upload`, formData)
       .then((response) => {
         setTaskId(response.data.task_id);
         setIsUploading(false);
