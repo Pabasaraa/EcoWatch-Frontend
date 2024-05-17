@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path={routerPaths.DEFAULT} element={<Layout />}>
-          <Route path={routerPaths.HOME} element={<Home />} />
+          <Route path={routerPaths.DEFAULT} element={<Home />} />
           <Route path={routerPaths.TOOLS} element={<Tools />} />
           <Route path={routerPaths.ABOUT_US} element={<AboutUs />} />
           <Route path={routerPaths.CONTACT_US} element={<ContactUs />} />

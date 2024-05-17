@@ -3,7 +3,7 @@ import routerPaths from "../../constants/routerPaths";
 const navLinks = [
   {
     title: "Home",
-    path: routerPaths.HOME,
+    path: routerPaths.DEFAULT,
   },
   {
     title: "Tools",

@@ -19,7 +19,7 @@ const NavBar = () => {
               <div
                 key={link.path}
                 className={`text-md h-full cursor-pointer font-semibold hover:text-neutral-500 transition duration-300 ease-in-out ${
-                  location.pathname.includes(link.path) &&
+                  location.pathname === link.path &&
                   "border-b-2 border-green-500 text-green-600 hover:text-green-500"
                 }`}
                 onClick={() => navigate(link.path)}
