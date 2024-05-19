@@ -26,7 +26,7 @@ const servicesList = [
     description:
       "Dive into the diverse world of ecosystems as we classify and understand the unique characteristics",
     img: ecoClassifyExplorer,
-    path: routerPaths.FOREST_TYPE_WATCH,
+    path: routerPaths.FOREST_Lidar,
   },
   {
     title: "Wildlife Tracker",

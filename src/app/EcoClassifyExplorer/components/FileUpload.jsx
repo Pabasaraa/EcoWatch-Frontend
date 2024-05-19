@@ -63,7 +63,7 @@ const FileUpload = ({ file, setFile, proceed, isUploading }) => {
      <div className="flex flex-col w-full h-full justify-center items-center mb-8">
        <div className="flex flex-col w-full md:w-5/6 justify-center gap-8">
          <div className="flex flex-col">
-           <p className="text-lg font-semibold text-center text-gray-800">Upload a file
+           <p className="text-lg font-semibold text-center text-gray-800">Upload a images
            </p>
           <hr className="border-1 border-neutral-200 w-1/2 mx-auto my-4" />
          </div>

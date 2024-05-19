@@ -10,6 +10,7 @@ import PredictionProcess from "./app/deforestationWatch/PredictionProcess";
 import PredictionResult from "./app/deforestationWatch/PredictionResult";
 import ForestTypeWatch from "./app/EcoClassifyExplorer/ForestTypeWatch";
 import ForestTypeResult from "./app/EcoClassifyExplorer/ForestTypeResult";
+import ForestLidar from "./app/EcoClassifyExplorer/ForestLidar";
 
 function App() {
   return (
@@ -41,6 +42,11 @@ function App() {
             element={<ForestTypeResult />}
           />
         </Route>
+
+        <Route
+            path={routerPaths.FOREST_Lidar}
+            element={<ForestLidar />}
+          />
 
       </Routes>
     </BrowserRouter>
