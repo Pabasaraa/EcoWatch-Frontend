@@ -97,7 +97,7 @@ const FileUpload = ({ file, setFile, proceed, isUploading }) => {
                       className="hidden"
                       ref={fileInputRef}
                       onChange={onFileChange}
-                      accept=".laz,.las,.lasd,.tiff,.png,.jpg"
+                      accept=".laz,.las,.lasd,.tif,.png,.jpg"
                     />
                   </div>
                 </div>

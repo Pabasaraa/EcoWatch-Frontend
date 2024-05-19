@@ -10,6 +10,9 @@ import PredictionProcess from "./app/deforestationWatch/PredictionProcess";
 import PredictionResult from "./app/deforestationWatch/PredictionResult";
 import ForestTypeWatch from "./app/EcoClassifyExplorer/ForestTypeWatch";
 import ForestTypeResult from "./app/EcoClassifyExplorer/ForestTypeResult";
+import EcoHealthMonitor from "./app/ecoHealthMonitor/EcoHealthMonitor";
+import HealthPredictionResult from "./app/ecoHealthMonitor/HealthPredictionResult";
+import WildlifeUpload from "./app/wildlifeTracker/WildlifeUpload";
 import ForestLidar from "./app/EcoClassifyExplorer/ForestLidar";
 
 function App() {
@@ -17,7 +20,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path={routerPaths.DEFAULT} element={<Layout />}>
-          <Route path={routerPaths.HOME} element={<Home />} />
+          <Route path={routerPaths.DEFAULT} element={<Home />} />
           <Route path={routerPaths.TOOLS} element={<Tools />} />
           <Route path={routerPaths.ABOUT_US} element={<AboutUs />} />
           <Route path={routerPaths.CONTACT_US} element={<ContactUs />} />
@@ -41,8 +44,19 @@ function App() {
             path={`${routerPaths.FOREST_TYPE_RESULT}/:id`}
             element={<ForestTypeResult />}
           />
+          <Route
+            path={routerPaths.ECOHEALTH_MONITOR}
+            element={<EcoHealthMonitor />}
+          />
+          <Route
+            path={`${routerPaths.ECOHEALTH_PREDICTION_RESULT}/:id`}
+            element={<HealthPredictionResult />}
+          />
+          <Route
+            path={routerPaths.WILDLIFE_TRACKER_UPLOAD}
+            element={<WildlifeUpload />}
+          />
         </Route>
-
         <Route
             path={routerPaths.FOREST_Lidar}
             element={<ForestLidar />}

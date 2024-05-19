@@ -10,13 +10,16 @@ import {
 import routerPaths from "../../constants/routerPaths";
 
 const PredictionResult = () => {
-  const DEFORESTED_AREAS_KEYS = [2, 4, 5, 6];
+  const DEFORESTED_AREAS_KEYS = [1, 3, 4, 5];
   const BACKEND_END_POINT = process.env.REACT_APP_BACKEND_END_POINT;
   const navigate = useNavigate();
   const { id } = useParams();
   const [fileName, setFileName] = useState(null);
   const [inputImg, setInputImg] = useState(null);
-  const [predictionResult, setPredictionResult] = useState(null);
+  const [predictionResult, setPredictionResult] = useState({
+    prediction: null,
+    colorizedPrediction: null,
+  });
   const [totalPoints, setTotalPoints] = useState(0);
   const [points, setPoints] = useState(null);
 
@@ -27,7 +30,10 @@ const PredictionResult = () => {
         console.log(response.data);
         setFileName(response.data.Results.filename);
         setInputImg(response.data.Results.input_img);
-        setPredictionResult(response.data.Results.prediction);
+        setPredictionResult((prev) => ({
+          prediction: response.data.Results.prediction,
+          colorizedPrediction: response.data.Results.colorized_prediction,
+        }));
         setPoints(response.data.Results.value);
         setTotalPoints(getTheTotal(response.data.Results.value));
         console.log(getTheTotal(response.data.Results.value));
@@ -70,9 +76,9 @@ const PredictionResult = () => {
                   </p>
                 </div>
                 <div className="flex flex-col text-center gap-1">
-                  {predictionResult ? (
+                  {predictionResult.prediction ? (
                     <img
-                      src={`data:image/jpeg;base64,${predictionResult}`}
+                      src={`data:image/jpeg;base64,${predictionResult.prediction}`}
                       alt="segmented prediction"
                       className="w-96 h-auto"
                     />
@@ -100,78 +106,141 @@ const PredictionResult = () => {
               <div className="flex flex-row gap-10 w-full justify-stretch py-4">
                 <div className="basis-1/2 px-4">
                   <ul className="list-disc list-inside">
-                    <li className="flex text-md text-neutral-600 font-semibold justify-between mb-1">
-                      <p>Remaining Forest Area</p>
+                    <li className="flex text-md text-neutral-600 font-semibold justify-between mb-3">
+                      <div className="flex gap-2">
+                        <div className="bg-[#FA3253] w-6 h-6 rounded-full" />
+                        <p>Remaining Forest Area</p>
+                      </div>
                       <p>
-                        {points && convertToPercentage(points[3], totalPoints)}
+                        {points ? (
+                          <span>
+                            {convertToPercentage(points[2], totalPoints)}
+                          </span>
+                        ) : (
+                          <span>0</span>
+                        )}
                         {" %"}
                       </p>
                     </li>
-                    <li className="flex flex-col text-md text-neutral-600 font-semibold gap-1 mb-1">
-                      <p className="flex w-full justify-between">
+                    <li className="flex flex-col text-md text-neutral-600 font-semibold gap-1 mb-3">
+                      <p className="flex w-full justify-between mb-2">
                         <span>Deforested Area</span>{" "}
                         <span>
-                          {points &&
-                            calculateSpecificTotal(
-                              points,
-                              DEFORESTED_AREAS_KEYS,
-                              totalPoints
-                            )}
-                          %
+                          {points ? (
+                            <span>
+                              {calculateSpecificTotal(
+                                points,
+                                DEFORESTED_AREAS_KEYS,
+                                totalPoints
+                              )}
+                            </span>
+                          ) : (
+                            <span>0</span>
+                          )}
+                          {" %"}
                         </span>
                       </p>
                       <ul className="list-disc list-inside pl-5">
-                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
-                          <p>Naturally Degraded Area</p>
+                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-3">
+                          <div className="flex gap-2">
+                            <div className="bg-[#B25050] w-6 h-6 rounded-full" />
+                            <p>Naturally Degraded Area</p>
+                          </div>
                           <p>
-                            {points &&
-                              convertToPercentage(points[5], totalPoints)}
+                            {points ? (
+                              <span>
+                                {convertToPercentage(points[3], totalPoints)}
+                              </span>
+                            ) : (
+                              <span>0</span>
+                            )}
                             {" %"}
                           </p>
                         </li>
-                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
-                          <p>Cultivation Area</p>
+                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-3">
+                          <div className="flex gap-2">
+                            <div className="bg-[#24B353] w-6 h-6 rounded-full" />
+                            <p>Cultivation Area</p>
+                          </div>
                           <p>
-                            {points &&
-                              convertToPercentage(points[2], totalPoints)}
+                            {points ? (
+                              <span>
+                                {convertToPercentage(points[1], totalPoints)}
+                              </span>
+                            ) : (
+                              <span>0</span>
+                            )}
                             {" %"}
                           </p>
                         </li>
-                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
-                          <p>Residential Area</p>
+                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-3">
+                          <div className="flex gap-2">
+                            <div className="bg-[#FAFA37] w-6 h-6 rounded-full" />
+                            <p>Residential Area</p>
+                          </div>
                           <p>
-                            {points &&
-                              convertToPercentage(points[4], totalPoints)}
+                            {points ? (
+                              <span>
+                                {convertToPercentage(points[5], totalPoints)}
+                              </span>
+                            ) : (
+                              <span>0</span>
+                            )}
                             {" %"}
                           </p>
                         </li>
-                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-0.5">
-                          <p>Other</p>
+                        <li className="flex text-md text-neutral-600 font-semibold justify-between mb-3">
+                          <div className="flex gap-2">
+                            <div className="bg-[#0AE411] w-6 h-6 rounded-full" />
+                            <p>Other</p>
+                          </div>
                           <p>
-                            {points &&
-                              convertToPercentage(points[6], totalPoints)}
+                            {points ? (
+                              <span>
+                                {convertToPercentage(points[4], totalPoints)}
+                              </span>
+                            ) : (
+                              <span>0</span>
+                            )}
                             {" %"}
                           </p>
                         </li>
                       </ul>
                     </li>
-                    <li className="flex text-md text-neutral-600 font-semibold justify-between mb-1">
-                      <p>Unclassified</p>
+                    <li className="flex text-md text-neutral-600 font-semibold justify-between mb-3">
+                      <div className="flex gap-2">
+                        <div className="bg-[#733380] w-6 h-6 rounded-full" />
+                        <p>Unclassified</p>
+                      </div>
                       <p>
-                        {points && convertToPercentage(points[1], totalPoints)}%
+                        {points ? (
+                          <span>
+                            {convertToPercentage(points[0], totalPoints)}
+                          </span>
+                        ) : (
+                          <span>0</span>
+                        )}
+                        {" %"}
                       </p>
                     </li>
                   </ul>
                 </div>
                 <div className="basis-1/2 flex justify-center">
-                  {predictionResult ? (
-                    <img
-                      src={`data:image/jpeg;base64,${predictionResult}`}
-                      alt="original input"
-                      className="w-80 h-auto"
-                    />
+                  {predictionResult.colorizedPrediction && inputImg ? (
+                    <div className="relative">
+                      <img
+                        src={`data:image/jpeg;base64,${predictionResult.colorizedPrediction}`}
+                        alt="original input"
+                        className="absolute inset-0 w-96 h-auto"
+                      />
+                      <img
+                        src={`data:image/jpeg;base64,${inputImg}`}
+                        alt="original input"
+                        className="w-96 h-auto opacity-40"
+                      />
+                    </div>
                   ) : (
-                    <div className="w-80 h-80 bg-neutral-100 rounded-md flex justify-center items-center">
+                    <div className="w-96 h-96 bg-neutral-100 rounded-md flex justify-center items-center">
                       <p className="text-lg text-neutral-500">Loading...</p>
                     </div>
                   )}
