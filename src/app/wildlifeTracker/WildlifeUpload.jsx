@@ -26,7 +26,10 @@ const WildlifeUpload = () => {
     formData.append("D_height_padding", DHeightPadding);
 
     try {
-      const response = await axios.post(`${BACKEND_END_POINT}/wildlife/upload`, formData);
+      const response = await axios.post(
+        `${BACKEND_END_POINT}/wildlife/upload`,
+        formData
+      );
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -38,14 +41,49 @@ const WildlifeUpload = () => {
   return (
     <div className="upload-container">
       <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-      <input type="text" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} />
-      <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-      <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
-      <input type="number" placeholder="R_width_padding" value={RWidthPadding} onChange={(e) => setRWidthPadding(Number(e.target.value))} />
-      <input type="number" placeholder="L_width_padding" value={LWidthPadding} onChange={(e) => setLWidthPadding(Number(e.target.value))} />
-      <input type="number" placeholder="U_height_padding" value={UHeightPadding} onChange={(e) => setUHeightPadding(Number(e.target.value))} />
-      <input type="number" placeholder="D_height_padding" value={DHeightPadding} onChange={(e) => setDHeightPadding(Number(e.target.value))} />
-      <button onClick={onProceed} disabled={isUploading}>Upload</button>
+      <input
+        type="text"
+        placeholder="Location"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+      />
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <input
+        type="time"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="R_width_padding"
+        value={RWidthPadding}
+        onChange={(e) => setRWidthPadding(Number(e.target.value))}
+      />
+      <input
+        type="number"
+        placeholder="L_width_padding"
+        value={LWidthPadding}
+        onChange={(e) => setLWidthPadding(Number(e.target.value))}
+      />
+      <input
+        type="number"
+        placeholder="U_height_padding"
+        value={UHeightPadding}
+        onChange={(e) => setUHeightPadding(Number(e.target.value))}
+      />
+      <input
+        type="number"
+        placeholder="D_height_padding"
+        value={DHeightPadding}
+        onChange={(e) => setDHeightPadding(Number(e.target.value))}
+      />
+      <button onClick={onProceed} disabled={isUploading}>
+        Upload
+      </button>
       {isUploading && <p>Uploading...</p>}
     </div>
   );
