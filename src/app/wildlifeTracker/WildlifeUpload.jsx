@@ -1,53 +1,91 @@
-import { React, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
-import Hero from "./components/Hero";
-import FileUpload from "./components/FileUpload";
-import routerPaths from "../../constants/routerPaths";
-import { getFileSize } from "./util/fileSize";
 
 const WildlifeUpload = () => {
   const BACKEND_END_POINT = process.env.REACT_APP_BACKEND_END_POINT;
-  const navigate = useNavigate();
   const [file, setFile] = useState(null);
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [RWidthPadding, setRWidthPadding] = useState(20);
+  const [LWidthPadding, setLWidthPadding] = useState(20);
+  const [UHeightPadding, setUHeightPadding] = useState(20);
+  const [DHeightPadding, setDHeightPadding] = useState(20);
   const [isUploading, setIsUploading] = useState(false);
-  const [taskId, setTaskId] = useState(null);
 
-  // useEffect(() => {
-  //   taskId &&
-  //     navigate(`${routerPaths.DEFORESTATION_PREDICTION_PROCESS}/${taskId}`);
-  // }, [taskId]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const onProceed = async (input) => {
+  const onProceed = async () => {
     setIsUploading(true);
     const formData = new FormData();
-    formData.append("file", input);
-    localStorage.setItem("fileName", input.name);
-    localStorage.setItem("fileSize", getFileSize(input.size));
+    formData.append("file", file);
+    formData.append("location", location);
+    formData.append("date", date);
+    formData.append("time", time);
+    formData.append("R_width_padding", RWidthPadding);
+    formData.append("L_width_padding", LWidthPadding);
+    formData.append("U_height_padding", UHeightPadding);
+    formData.append("D_height_padding", DHeightPadding);
 
-    await axios
-      .post(`${BACKEND_END_POINT}/wildlife/upload`, formData)
-      .then((response) => {
-        setTaskId(response.data.task_id);
-        setIsUploading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      const response = await axios.post(
+        `${BACKEND_END_POINT}/wildlife/upload`,
+        formData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
-    <>
-      <div className="flex flex-col gap-8">
-        <Hero />
-        <FileUpload
-          file={file}
-          setFile={setFile}
-          proceed={onProceed}
-          isUploading={isUploading}
-        />
-      </div>
-    </>
+    <div className="upload-container">
+      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+      <input
+        type="text"
+        placeholder="Location"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+      />
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <input
+        type="time"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="R_width_padding"
+        value={RWidthPadding}
+        onChange={(e) => setRWidthPadding(Number(e.target.value))}
+      />
+      <input
+        type="number"
+        placeholder="L_width_padding"
+        value={LWidthPadding}
+        onChange={(e) => setLWidthPadding(Number(e.target.value))}
+      />
+      <input
+        type="number"
+        placeholder="U_height_padding"
+        value={UHeightPadding}
+        onChange={(e) => setUHeightPadding(Number(e.target.value))}
+      />
+      <input
+        type="number"
+        placeholder="D_height_padding"
+        value={DHeightPadding}
+        onChange={(e) => setDHeightPadding(Number(e.target.value))}
+      />
+      <button onClick={onProceed} disabled={isUploading}>
+        Upload
+      </button>
+      {isUploading && <p>Uploading...</p>}
+    </div>
   );
 };
 
