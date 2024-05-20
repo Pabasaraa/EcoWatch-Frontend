@@ -57,21 +57,22 @@ const FileUpload = ({ file, setFile, proceed, isUploading }) => {
       proceed(file);
     }
   };
-  
+
   return (
-     <>
-     <div className="flex flex-col w-full h-full justify-center items-center mb-8">
-       <div className="flex flex-col w-full md:w-5/6 justify-center gap-8">
-         <div className="flex flex-col">
-           <p className="text-lg font-semibold text-center text-gray-800">Upload a images
-           </p>
-          <hr className="border-1 border-neutral-200 w-1/2 mx-auto my-4" />
-         </div>
-        <div className="flex flex-col gap-2 mx-4">
-          <div
+    <>
+      <div className="flex flex-col w-full h-full justify-center items-center mb-8">
+        <div className="flex flex-col w-full md:w-5/6 justify-center gap-8">
+          <div className="flex flex-col">
+            <p className="text-lg font-semibold text-center text-gray-800">
+              Upload a images
+            </p>
+            <hr className="border-1 border-neutral-200 w-1/2 mx-auto my-4" />
+          </div>
+          <div className="flex flex-col gap-2 mx-4">
+            <div
               className={`flex flex-col w-full h-full justify-center items-center border-2 border-dashed border-green-500 border-opacity-50 py-6 rounded-lg ${
                 isDragOver ? "bg-neutral-100" : ""
-            }`}
+              }`}
               onDrop={onDrop}
               onDragOver={onDragOver}
               onDragLeave={onDragLeave}
@@ -81,7 +82,7 @@ const FileUpload = ({ file, setFile, proceed, isUploading }) => {
                   <div className="flex flex-col items-center">
                     <CloudArrowUpIcon className="h-12 w-12 text-green-600 mb-2" />
                     <p className="text-md font-semibold text-center text-gray-800">
-                      Drag and drop to upload the file or
+                      Drag and drop to upload the images
                     </p>
                   </div>
                   <div>
@@ -103,8 +104,7 @@ const FileUpload = ({ file, setFile, proceed, isUploading }) => {
                 <div>
                   <ul className="list-disc list-inside">
                     <li className="text-xs text-neutral-400">
-                      You can upload .LAZ, .LAS, .LASD, .TIFF, .PNG, or .JPG
-                      files
+                      You can upload .PNG, or .JPG files
                     </li>
                     <li className="text-xs text-neutral-400">
                       Maximum file size is 150MB
@@ -204,4 +204,3 @@ const FileUpload = ({ file, setFile, proceed, isUploading }) => {
 };
 
 export default FileUpload;
-

@@ -7,12 +7,13 @@ const WildlifeTrackResult = () => {
   const [videoSrc, setVideoSrc] = useState("");
   const [videoName, setVideoName] = useState("");
   const [excelData, setExcelData] = useState(null);
+  const [outputVideoSrc, setOutputVideoSrc] = useState("");
 
   useEffect(() => {
     const fetchVideo = async () => {
       try {
         const response = await fetch(
-          `${BACKEND_END_POINT}/wildlife/results/video/${id}`
+          `${BACKEND_END_POINT}/wildlife/results/video/input/${id}`
         );
         const blob = await response.blob();
         const videoUrl = URL.createObjectURL(blob);
@@ -21,6 +22,19 @@ const WildlifeTrackResult = () => {
         const filenameMatch = contentDisposition.match(/filename="(.+)"/);
         const filename = filenameMatch ? filenameMatch[1] : "video.mp4";
         setVideoName(filename);
+      } catch (error) {
+        console.error("Error fetching the video:", error);
+      }
+    };
+
+    const fetchOutputVideo = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_END_POINT}/wildlife/results/video/output/${id}`
+        );
+        const blob = await response.blob();
+        const videoUrl = URL.createObjectURL(blob);
+        setOutputVideoSrc(videoUrl);
       } catch (error) {
         console.error("Error fetching the video:", error);
       }
@@ -40,12 +54,13 @@ const WildlifeTrackResult = () => {
 
     fetchVideo();
     fetchExcel();
+    fetchOutputVideo();
   }, [id, BACKEND_END_POINT]);
 
   const downloadVideo = () => {
-    if (videoSrc) {
+    if (outputVideoSrc) {
       const link = document.createElement("a");
-      link.href = videoSrc;
+      link.href = outputVideoSrc;
       link.setAttribute("download", videoName);
       document.body.appendChild(link);
       link.click();

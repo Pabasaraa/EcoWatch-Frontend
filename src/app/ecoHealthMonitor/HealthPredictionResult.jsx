@@ -27,7 +27,7 @@ const HealthPredictionResult = () => {
         setCarbonDensity(response.data.Results.carbon_density);
         setECS(response.data.Results.estimated_carbon_storage);
         setSumBiomass(response.data.Results.sum_biomass);
-        setTotalAreaKm2(response.data.Results.totalAreaKm2);
+        setTotalAreaKm2(response.data.Results.total_area_km2);
       })
       .catch((error) => {
         console.error(error);
@@ -45,13 +45,25 @@ const HealthPredictionResult = () => {
             <hr className="border-1 border-neutral-200 w-1/2 mx-auto my-4" />
           </div>
           <div className="flex flex-col gap-2 border border-neutral-200 rounded-md px-4 py-2">
-            <p>{fileName}</p><br></br>
-            <p><b>Estimated carbon Storage :</b> {ECS} kg</p>
-            <p><b>Sum of Biomass :</b> {sumBiomass} kg</p><br></br>
-            
-            <p><b>Biomass Density :</b> {biomassDensity} kg/m2</p>
-            <p><b>Carbon Density :</b> {carbonDensity} kg/m2</p>
+            <p>{fileName}</p>
+            <br></br>
+            <p>
+              <b>Estimated carbon Storage :</b> {ECS} kg
+            </p>
+            <p>
+              <b>Sum of Biomass :</b> {sumBiomass} kg
+            </p>
+            <br></br>
 
+            <p>
+              <b>Biomass Density :</b> {biomassDensity} kg/m2
+            </p>
+            <p>
+              <b>Carbon Density :</b> {carbonDensity} kg/m2
+            </p>
+            <p>
+              <b>Total Area (sq. km.) :</b> {totalAreaKm2} sq. km.
+            </p>
           </div>
           <div className="flex flex-col w-full h-full justify-center items-center mt-6">
             <button
