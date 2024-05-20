@@ -5,14 +5,17 @@ import Home from "./app/home/Home";
 import Tools from "./app/tools/Tools";
 import AboutUs from "./app/aboutUs/AboutUs";
 import ContactUs from "./app/contactUs/ContactUs";
+// tools
 import DeforestationWatch from "./app/deforestationWatch/DeforestationWatch";
 import PredictionProcess from "./app/deforestationWatch/PredictionProcess";
 import PredictionResult from "./app/deforestationWatch/PredictionResult";
 import ForestTypeWatch from "./app/EcoClassifyExplorer/ForestTypeWatch";
+import ForestLidar from "./app/EcoClassifyExplorer/ForestLidar";
 import ForestTypeResult from "./app/EcoClassifyExplorer/ForestTypeResult";
 import EcoHealthMonitor from "./app/ecoHealthMonitor/EcoHealthMonitor";
 import HealthPredictionResult from "./app/ecoHealthMonitor/HealthPredictionResult";
 import WildlifeUpload from "./app/wildlifeTracker/WildlifeUpload";
+import WildlifeTrackResult from "./app/wildlifeTracker/WildlifeTrackResult";
 
 function App() {
   return (
@@ -55,7 +58,12 @@ function App() {
             path={routerPaths.WILDLIFE_TRACKER_UPLOAD}
             element={<WildlifeUpload />}
           />
+          <Route
+            path={`${routerPaths.WILDLIFE_TRACKER_RESULT}/:id`}
+            element={<WildlifeTrackResult />}
+          />
         </Route>
+        <Route path={routerPaths.FOREST_Lidar} element={<ForestLidar />} />
       </Routes>
     </BrowserRouter>
   );

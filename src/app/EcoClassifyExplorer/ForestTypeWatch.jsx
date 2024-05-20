@@ -14,8 +14,7 @@ const ForestTypeWatch = () => {
   const [taskId, setTaskId] = useState(null);
 
   useEffect(() => {
-    taskId &&
-      navigate(`${routerPaths.FOREST_TYPE_RESULT}/${taskId}`);
+    taskId && navigate(`${routerPaths.FOREST_TYPE_RESULT}/${taskId}`);
   }, [taskId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onProceed = async (input) => {
@@ -35,6 +34,7 @@ const ForestTypeWatch = () => {
         console.error(error);
       });
   };
+
   return (
     <>
       <div className="flex flex-col gap-8">
